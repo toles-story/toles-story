@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tôles-Story</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #3991e6 0%, #f7e35f 100%);
+      margin: 0;
+      min-height: 100vh;
+      padding: 0;
+    }
+    .page {
+      display: none;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+    .page.active {
+      display: block;
+    }
+    .logo-container {
+      text-align: center;
+      margin: 35px 0 18px 0;
+    }
+    .logo-img {
+      width: 110px;
+      height: auto;
+      display: block;
+      margin: 0 auto 7px auto;
+    }
+    .logo-title {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 2.3rem;
+      color: #fdd835;
+      text-shadow: 2px 2px 0 #1976d2, -2px -2px 0 #1976d2, 2px -2px 0 #1976d2, -2px 2px 0 #1976d2;
+      letter-spacing: 1.5px;
+      line-height: 1;
+      margin: 0;
+    }
+    .slogan {
+      text-align: center;
+      font-size: 1.12rem;
+      color: #333;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+    .big-btn {
+      display: block;
+      width: 96%;
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 18px 0;
+      font-size: 1.2rem;
+      border-radius: 34px;
+      border: none;
+      background: #ffca2b;
+      color: #1976d2;
+      font-family: 'Luckiest Guy', cursive;
+      font-weight: bold;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 1px;
+      margin-top: 24px;
+    }
+    .big-btn:active {
+      background: #ffe066;
+    }
+    @media (max-width: 600px) {
+      .logo-img { width: 26vw; }
+      .logo-title { font-size: 7vw; }
+      .slogan { font-size: 1.3rem; }
+      .big-btn { font-size: 4.5vw; }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE ACCUEIL -->
+  <div id="page-accueil" class="page active">
+    <div class="logo-container">
+      <img src="logo-toles-story.png" alt="Tôles-Story logo" class="logo-img" />
+      <div class="logo-title">TÔLES-STORY</div>
+    </div>
+    <div class="slogan">Bienvenue sur Tôles-Story, l’outil mobile des chaudronniers !</div>
+    <button class="big-btn" onclick="showPage('forme')">Commencer</button>
+  </div>
+
+  <!-- PAGE CHOIX DE FORME -->
+  <div id="page-forme" class="page">
+    <div class="logo-container">
+      <img src="logo-toles-story.png" alt="Tôles-Story logo" class="logo-img" />
+      <div class="logo-title">TÔLES-STORY</div>
+    </div>
+    <div class="slogan" style="margin-bottom:18px;">Choisis la forme de ta pièce</div>
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-bottom:24px;">
+      <button class="big-btn" style="width:45%;" onclick="selectForme('U')">U</button>
+      <button class="big-btn" style="width:45%;" onclick="selectForme('L')">L</button>
+      <button class="big-btn" style="width:95%;" onclick="selectForme('Cone')">Trône de cône</button>
+      <button class="big-btn" style="width:95%;" onclick="selectForme('Rectangle')">Rectangle</button>
+    </div>
+    <button class="big-btn" id="btn-next-forme" style="opacity:0.5;" disabled onclick="showPage('dimensions')">Suivant</button>
+  </div>
+
+  <script>
+    // Navigation entre pages
+    function showPage(page) {
+      document.querySelectorAll('.page').forEach(div => div.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+    }
+
+    // Gestion de la sélection de forme
+    let formeChoisie = null;
+    function selectForme(forme) {
+      formeChoisie = forme;
+      // Surligner le bouton choisi
+      document.querySelectorAll('#page-forme .big-btn').forEach(btn => btn.style.background = '#ffca2b');
+      event.target.style.background = '#ffe066';
+      // Activer le bouton "Suivant"
+      const btnNext = document.getElementById('btn-next-forme');
+      btnNext.disabled = false;
+      btnNext.style.opacity = 1;
+    }
+  </script>
+</body>
+</html>
